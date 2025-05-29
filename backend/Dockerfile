@@ -1,18 +1,9 @@
-# Gunakan image python
-FROM python:3.9-slim
+FROM python:3.10-slim
 
-# Set direktori kerja di container
 WORKDIR /app
-
-# Salin requirements dan install dependensi
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Salin semua file
 COPY . .
 
-# Port untuk Cloud Run
-ENV PORT=8080
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Jalankan aplikasi dengan Gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+EXPOSE 5000
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
