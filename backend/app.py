@@ -12,7 +12,7 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/predict/*": {"origins": "*"}})
 
 # Lokasi dan nama file model penyakit tanaman
 disease_model_dir = "model"
