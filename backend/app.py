@@ -97,6 +97,10 @@ def load_and_process_image(image_data, target_size=(224, 224)):
     img_array = preprocess_input(img_array)
     return img_array
 
+@app.route('/')
+def index():
+    return 'API is running'
+
 @app.route('/predict/disease', methods=['POST'])
 def predict_disease():
     global disease_model
